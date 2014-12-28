@@ -5,13 +5,17 @@
 <script>
 $(function() { 
     $('head').load('header.html');
-})
+});
+$(function() {
+    $('#header').load('links.html');
+});
 $(function() { 
     $('#footer').load('footer.html');
-})
+});
 </script>
 </head>
 <body>
+    <div id='header'></div>
 <div class="row marketing">
 <p>
 Welcome to my website! It's slowly being constructed, so feel free to poke around, but don't be surprised if you find a broken link or three.
@@ -31,3 +35,4 @@ In addition to my research, I'm very interested in computer graphics in general.
 </div>
 <div id='footer'></div>
 </body>
+</html>
