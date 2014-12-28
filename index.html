@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
+<head>
 <script src='jquery.js'></script>
 <script>
 $(function() { 
-    $('#includedContent').load('header.html');
+    $('#header').load('header.html');
+})
+$(function() { 
+    $('#footer').load('footer.html');
 })
 </script>
-<head>
-    <div id='includedContent'></div>
 </head>
+<body>
+<div id='header'></div>
 <div class="row marketing">
 <p>
 Welcome to my website! It's slowly being constructed, so feel free to poke around, but don't be surprised if you find a broken link or three.
@@ -26,9 +30,5 @@ on physics based character animation. For more information about my research, ch
 In addition to my research, I'm very interested in computer graphics in general. Check out some of my individual and course projects in <a href="projects.php">projects</a>.
 </p>
 </div>
-<script>
-$(function() { 
-    $('#includedContent').load('footer.html');
-})
-</script>
+<div id='footer'></div>
 </body>
