@@ -14,7 +14,8 @@ title: Michael Firmin
     <script src="static/functiongrapher.js"></script>
     <script>
         $(document).ready(function() {
-            $('#grapher').append(functiongrapher);
+            $('#grapher').append(world.panel);
+            world.setSize();
             $('#getFunction').click(function() {
                 var text = $('textarea#function').val();
                 updateShader(text);
