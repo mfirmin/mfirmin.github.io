@@ -5,25 +5,32 @@ title: Michael Firmin
 <!DOCTYPE html>
 <html>
     <head>
-{% include header.html %}
-{% include links.html %}
     <title>GLSL 3D Function Grapher</title>
+
+    <link rel="stylesheet" type="text/css" href="css/functiongrapher.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="static/lib/three.min.js"></script>
     <script type="text/javascript" src="static/lib/TrackballControls.js"></script>
     <script src="static/functiongrapher.js"></script>
-    </head>
-<body>
-    <div>
-        <h4>Raycasting based 3D Function Grapher using GLSL Shaders</h4>
-        Below is an example of a 3D function graphed using a ray-casting approach. It uses GLSL shaders and Three.js in order to create an interactive, high quality surface. You can rotate the plot with the mouse, and zoom with the scroll wheel. A blog post on this, as well as a more interactive version that supports user-provided functions is coming soon! The function being graphed is the <a href="http://mathworld.wolfram.com/ClebschDiagonalCubic.html">Clebsch Diagonal Cubic</a>. <br>
-        See this project on <a href="https://github.com/mfirmin/glsl-function-grapher">github</a>.
-    </div>
-    <div id='grapher' style='border: 1px solid black; width: 404px; height: 404px'></div>
     <script>
         $(document).ready(function() {
             $('#grapher').append(functiongrapher);
         });
     </script>
+    </head>
+<body>
+    <div id='info'>
+        <h4>Raycasting based 3D Function Grapher using GLSL Shaders</h4>
+        Below is an example of a 3D function graphed using a ray-casting approach. It uses GLSL shaders and Three.js in order to create an interactive, high quality surface. You can rotate the plot with the mouse, and zoom with the scroll wheel. A blog post on this, as well as a more interactive version that supports user-provided functions is coming soon! The function being graphed is the <a href="http://mathworld.wolfram.com/ClebschDiagonalCubic.html">Clebsch Diagonal Cubic</a>. <br>
+        See this project on <a href="https://github.com/mfirmin/glsl-function-grapher">github</a>.
+    </div>
+    <div id='main'>
+        <div id='grapher'></div>
+        <div id='fninput'>
+            Function Input: 0 = <br>
+            <textarea rows="5" cols="80" id=function"></textarea>
+            <button id='getFunction'>Update</button>
+        </div>
+    </div>
 </body>
 </html>
