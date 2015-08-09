@@ -18,8 +18,10 @@ title: Michael Firmin
             world.setSize();
             $('#getFunction').click(function() {
                 var text = $('textarea#function').val();
-                updateShader(text);
 
+            });
+            $('#opacity').change(function() {
+                setOpacity((this.checked) ? 1 : 0);
             });
         });
     </script>
@@ -32,6 +34,9 @@ title: Michael Firmin
     Blog post coming soon!
     </div>
     <div id='main'>
+        <div id='controls'>
+            <input type="checkbox" id="opacity" value="Opaque">Opaque<br>
+        </div>
         <div id='grapher'></div>
         <div id='fninput'>
             Function Input: <br>
