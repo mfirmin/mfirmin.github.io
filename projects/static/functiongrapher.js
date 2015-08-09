@@ -341,7 +341,7 @@ World.prototype.initialize = function() {
     */
     this.camera.position.z = 5;
 
-    controls = new THREE.TrackballControls( this.camera );
+    controls = new THREE.TrackballControls( this.camera, $('#grapher')[0] );
    // controls.target.set( 0, 0, 0 );
 
     controls.rotateSpeed = 20.0;
