@@ -373,9 +373,6 @@ World.prototype.initializeDiv = function() {
     this.canvas = $(this.renderer.domElement).width(400).height(400).addClass("threeCanvas");
     $(this.panel).append(this.canvas);
 
-    $(document).ready(function() {
-        $('body').append(this.panel);
-    }.bind(this));
 }
 
 World.prototype.addEntity = function(e) {
@@ -9821,6 +9818,9 @@ world.addEntity(box);
 
 
 world.go();
+
+window.functiongrapher = world.panel;
+
 
 
 },{"./entity/box":1,"./world/world":7,"jquery":8}]},{},[9]);
