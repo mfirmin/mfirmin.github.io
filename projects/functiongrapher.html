@@ -33,9 +33,10 @@ title: Michael Firmin
         <div id='grapher'></div>
         <div id='fninput'>
             Function Input: 0 = <br>
-            <textarea rows="5" cols="80" id="function">float fn(float x, float y, float z) {&#13;&#10;&#13;&#10;    return x*x - y*y - z; &#13;&#10;&#13;&#10;}</textarea>
+            <textarea rows="5" cols="80" id="function">float fn(float x, float y, float z) {&#13;&#10;    return 81.*(x*x*x + y*y*y + z*z*z) - &#13;&#10;            189.*(x*x*y + x*x*z + y*y*x + y*y*z+ z*z*x + z*z*y) + &#13;&#10;            54.*(x*y*z) + 126.*(x*y+x*z+y*z) - 9.*(x*x+y*y+z*z) - 9.*(x+y+z) + 1.;&#13;&#10;}</textarea>
             <button id='getFunction'>Update</button>
         </div>
     </div>
 </body>
 </html>
+&#13;&#10;
