@@ -379,8 +379,6 @@ World.prototype.setSize = function() {
     var w = $(this.opts.element).width();
     var h = $(this.opts.element).height();
 
-    console.log(w, h);
-
     this.canvas.width(w);
     this.canvas.height(h);
 
@@ -9716,27 +9714,6 @@ function makeFragmentShader(fn) {
 
         fn +
 
-        // Solely used for lighting..., maybe estimate the gradient somehow if we want the user
-        // to be able to input their own fns.
-        'vec3 gradClebsch(vec3 pt) {\n' +
-            'float x = pt.x; float y = -pt.y; float z = -pt.z;\n'+
-            'return vec3('+
-                    '81.*(3.*x*x)-189.*(2.*x*y+2.*x*z+y*y+z*z)+54.*y*z+126.*(y+z)-9.*2.*x-9.,'+
-                    '81.*(3.*y*y)-189.*(2.*x*y+2.*y*z+x*x+z*z)+54.*x*z+126.*(x+z)-9.*2.*y-9.,'+
-                    '81.*(3.*z*z)-189.*(2.*z*y+2.*x*z+x*x+y*y)+54.*x*y+126.*(x+y)-9.*2.*z-9.'+
-            ');\n'+
-        '}\n'+
-        
-        // Kiss Surface.
-        'float funcKiss(vec3 pt) {\n' +
-            'float x = pt.x; float y = -pt.y; float z = -pt.z;\n'+
-            'return z*z*z*z - z*z*z*z*z - x*x - y*y;\n'+
-        '}\n' +
-        'vec3 gradKiss(vec3 pt) {\n' +
-            'float x = pt.x; float y = -pt.y; float z = -pt.z;\n'+
-            'return vec3(-2.*x, -2.*y, 4.*z*z*z - 5.*z*z*z*z);\n'+
-        '}\n'+
-
         'void main() {' + 
             'vec3 ro = cameraPosition;\n'+
             'vec3 dir = vPosition.xyz - ro;\n'+
@@ -9775,26 +9752,10 @@ function makeFragmentShader(fn) {
                     'gl_FragColor = vec4(0.,0.,0.,1.); return;\n'+
                 '}\n'+
                 'float curr = 0.;\n'+
-                'if (surface == 0.) { curr = fn(pt.x, pt.y, pt.z); } else { curr = funcKiss(pt); }\n'+
+                'curr = fn(pt.x, pt.y, pt.z);\n'+
 
                 'if (last*curr < 0.) {\n'+
                     'vec3 grad = vec3(0.,0.,0.);\n'+
-                    'if (surface == 0.) { grad = gradClebsch(pt); } else { grad = gradKiss(pt); }\n'+
-                    'float mag = length(grad);\n'+
-                    'vec3 norm = vec3(0.,0.,0.);\n'+
-                    'if (mag > 0.) {\n'+
-                        'norm = grad*1./mag;\n'+
-                    '}\n'+
-                    'if (dot(norm, cameraPosition - pt) < 0.) {\n'+
-                        'norm = norm*-1.;\n'+
-                    '}\n'+
-                    
-                    /*
-                    'if (opacity >= 1.) {\n'+
-                        'gl_FragColor = vec4(vec3(1.,1.,1.)*abs(dot(norm, normalize(lightsource-pt))), 1.);\n'+
-                        'return;\n'+
-                    '}\n'+
-                    */
 
                      // Gradient-less coloring?
                     'if (opacity >= 1.) {\n'+
@@ -9802,10 +9763,12 @@ function makeFragmentShader(fn) {
                         'return;\n'+
                     '}\n'+
                     
+                    /*
                     'else {\n'+
                         'I += abs(dot(norm, normalize(lightsource-pt)));\n'+
                         'intersects++;\n'+
                     '}\n'+
+                    */
                         
                 '}\n'+
                 'last = curr;\n'+
