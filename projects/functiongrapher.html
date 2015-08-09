@@ -15,6 +15,10 @@ title: Michael Firmin
     <script>
         $(document).ready(function() {
             $('#grapher').append(functiongrapher);
+            $('#getFunction').click(function() {
+                var text = $('textarea#function').val();
+                console.log(text);
+            });
         });
     </script>
     </head>
@@ -28,7 +32,7 @@ title: Michael Firmin
         <div id='grapher'></div>
         <div id='fninput'>
             Function Input: 0 = <br>
-            <textarea rows="5" cols="80" id=function"></textarea>
+            <textarea rows="5" cols="80" id="function">float function(vec3 xyz) {&#13;&#10;&#13;&#10;    return 0.0; &#13;&#10;&#13;&#10;}</textarea>
             <button id='getFunction'>Update</button>
         </div>
     </div>
