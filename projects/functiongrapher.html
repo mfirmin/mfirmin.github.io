@@ -21,9 +21,45 @@ title: Michael Firmin
                 updateShader(text);
 
             });
+            $('#clebsch').click(function() {
+                var text = '81.0*(x*x*x + y*y*y + z*z*z) - 189.0*(x*x*y + x*x*z + y*y*x + y*y*z+ z*z*x + z*z*y) + 54.0*(x*y*z) + 126.0*(x*y+x*z+y*z) - 9.0*(x*x+y*y+z*z) - 9.0*(x+y+z) + 1.0';
+                updateShader(text);
+                $('textarea#function').val(text);
+            });
+            $('#kiss').click(function() {
+                var text = 'z*z*z*z - z*z*z*z*z - x*x - y*y';
+                updateShader(text);
+                $('textarea#function').val(text);
+            });
+            $('#sin').click(function() {
+                var text = 'sin(x*y) - z';
+                updateShader(text);
+                $('textarea#function').val(text);
+            });
+            // controls
             $('#opacity').change(function() {
                 setOpacity((this.checked) ? 1 : 0);
             });
+            /*
+            $('#xmax').change(function() {
+                updateBounds({'xBounds': {'y': this.value}});
+            });
+            $('#ymax').change(function() {
+                updateBounds({'yBounds': {'y': this.value}});
+            });
+            $('#zmax').change(function() {
+                updateBounds({'zBounds': {'y': this.value}});
+            });
+            $('#xmin').change(function() {
+                updateBounds({'xBounds': {'x': this.value}});
+            });
+            $('#ymin').change(function() {
+                updateBounds({'yBounds': {'x': this.value}});
+            });
+            $('#zmin').change(function() {
+                updateBounds({'zBounds': {'x': this.value}});
+            });
+            */
         });
     </script>
     </head>
@@ -37,30 +73,25 @@ title: Michael Firmin
     <div id='main'>
         <div id='controls'>
             <input type="checkbox" id="opacity" value="Opaque">Opaque<br>
+            x limits: [<input type="number" id="xmin" value="-1">, <input type="number" id="xmax", value="1">] <br>
+            y limits: [<input type="number" id="ymin" value="-1">, <input type="number" id="ymax", value="1">] <br>
+            z limits: [<input type="number" id="zmin" value="-1">, <input type="number" id="zmax", value="1">] <br>
         </div>
         <div id='grapher'></div>
         <div id='fninput'>
-            Function Input: <br>
-            0 = <br>
-            <textarea rows="5" cols="80" id="function">float fn(float x, float y, float z) {&#13;&#10;    return 81.0*(x*x*x + y*y*y + z*z*z) - &#13;&#10;            189.0*(x*x*y + x*x*z + y*y*x + y*y*z+ z*z*x + z*z*y) + &#13;&#10;            54.0*(x*y*z) + 126.0*(x*y+x*z+y*z) - 9.0*(x*x+y*y+z*z) - 9.0*(x+y+z) + 1.0;&#13;&#10;}</textarea> <br>
-            <button id='getFunction'>Update</button> <br>
+            Function Input:  <br>
+            0 =
+            <textarea rows="5" cols="80" id="function">81.0*(x*x*x + y*y*y + z*z*z) - &#13;&#10;            189.0*(x*x*y + x*x*z + y*y*x + y*y*z+ z*z*x + z*z*y) + &#13;&#10;            54.0*(x*y*z) + 126.0*(x*y+x*z+y*z) - 9.0*(x*x+y*y+z*z) - 9.0*(x+y+z) + 1.0&#13;&#10;</textarea> <br>
+            <button id='getFunction'>Graph!</button> <br>
+            Having Trouble? The function must be written using <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">glsl</a> notation. A common error is that glsl is picky about floating point numbers vs integers, so make sure you write "1.0" instead of "1". Input should be in the form "0 = f(x,y,z)", without the "0 ="
 
             <p>
             Try these out: <br>
             <a href="http://mathworld.wolfram.com/ClebschDiagonalCubic.html">Clebsch Diagonal Cubic</a>: 
-            <pre>
-float fn(float x, float y, float z) {
-    return 81.0*(x*x*x + y*y*y + z*z*z) - 
-           189.0*(x*x*y + x*x*z + y*y*x + y*y*z+ z*z*x + z*z*y) + 
-           54.0*(x*y*z) + 126.0*(x*y+x*z+y*z) - 9.0*(x*x+y*y+z*z) - 9.0*(x+y+z) + 1.0;
-}
-             </pre>
-            <a href="http://mathworld.wolfram.com/KissSurface.html">Kiss Surface</a>: 
-            <pre>
-float fn(float x, float y, float z) {
-    return z*z*z*z - z*z*z*z*z - x*x - y*y;
-}
-            </pre>
+            <button id='clebsch'>Graph!</button> <br>
+            <a href="http://mathworld.wolfram.com/KissSurface.html">Kiss Surface</a>
+            <button id='kiss'>Graph!</button> <br>
+            z=sin(xy)<button id='sin'>Graph!</button> <br>
             </p>
         </div>
     </div>
